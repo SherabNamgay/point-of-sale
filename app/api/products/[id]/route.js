@@ -14,11 +14,13 @@ export async function GET(req, {params}) {
     return Response.json({data})
 }
 
-export async function PUT(req, {params}){
-	const body=await req.json()
-	const {daysToPerish} =body;
-	const data =await knex('products').where('id', params.id).update({
-		days_to_perish : daysToPerish
+export async function PUT(req, { params }) {
+	const body = await req.json()
+	const { name, isPerishable, daysToPerish } = body;
+	const data = await knex('products').where('id', params.id).update({
+		name: name,
+		is_perishable: isPerishable,
+		days_to_perish: daysToPerish
 	})
-	return Response.json({data})
-  }
+	return Response.json({ data })
+}
